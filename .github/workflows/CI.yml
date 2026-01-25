@@ -30,21 +30,27 @@ jobs:
           git clone https://github.com/jacobwilliams/json-fortran.git
               
       - name: fpm test (debug)
+        shell: bash
         run: |
           pwd
           cd json-fortran
           if [ "${{ matrix.compiler }}" = "ifx" ]; then
             fpm test --compiler ${{ matrix.compiler }} --profile debug --flag "-fpp"
+          elif [ "${{ matrix.compiler }}" = "lfortran" ]; then
+            fpm test --compiler ${{ matrix.compiler }} --profile debug --flag "-cpp"
           else
             fpm test --compiler ${{ matrix.compiler }} --profile debug
           fi
 
       - name: fpm test (release)
+        shell: bash
         run: |
           pwd
           cd json-fortran
           if [ "${{ matrix.compiler }}" = "ifx" ]; then
             fpm test --compiler ${{ matrix.compiler }} --profile release --flag "-fpp"
+          elif [ "${{ matrix.compiler }}" = "lfortran" ]; then
+            fpm test --compiler ${{ matrix.compiler }} --profile release --flag "-cpp"
           else
             fpm test --compiler ${{ matrix.compiler }} --profile release
           fi
