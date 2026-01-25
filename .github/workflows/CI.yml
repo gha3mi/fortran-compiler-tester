@@ -25,12 +25,16 @@ jobs:
           platform: ${{ matrix.os }}
 
       - name: Checkout code
-        run: |
-          git clone https://github.com/jacobwilliams/json-fortran.git
-          cd json-fortran
+        run: git clone https://github.com/jacobwilliams/json-fortran.git
               
       - name: fpm test (debug)
-        run: fpm test --compiler ${{ matrix.compiler }} --profile debug
+        run: |
+          pwd
+          cd json-fortran
+          fpm test --compiler ${{ matrix.compiler }} --profile debug
 
       - name: fpm test (release)
-        run: fpm test --compiler ${{ matrix.compiler }} --profile release
+        run: |
+          pwd
+          cd json-fortran
+          fpm test --compiler ${{ matrix.compiler }} --profile release
