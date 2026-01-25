@@ -33,10 +33,18 @@ jobs:
         run: |
           pwd
           cd json-fortran
-          fpm test --compiler ${{ matrix.compiler }} --profile debug
+          if [ "${{ matrix.compiler }}" = "ifx" ]; then
+            fpm test --compiler ${{ matrix.compiler }} --profile debug --flag "-fpp"
+          else
+            fpm test --compiler ${{ matrix.compiler }} --profile debug
+          fi
 
       - name: fpm test (release)
         run: |
           pwd
           cd json-fortran
-          fpm test --compiler ${{ matrix.compiler }} --profile release
+          if [ "${{ matrix.compiler }}" = "ifx" ]; then
+            fpm test --compiler ${{ matrix.compiler }} --profile release --flag "-fpp"
+          else
+            fpm test --compiler ${{ matrix.compiler }} --profile release
+          fi
