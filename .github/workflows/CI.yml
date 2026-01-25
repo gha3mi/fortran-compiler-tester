@@ -26,9 +26,7 @@ jobs:
 
       - name: Checkout code
         run: |
-          conda install git -y
           git clone https://github.com/jacobwilliams/json-fortran.git
-              
       - name: fpm test (debug)
         shell: bash
         run: |
@@ -37,7 +35,7 @@ jobs:
           if [ "${{ matrix.compiler }}" = "ifx" ]; then
             fpm test --compiler ${{ matrix.compiler }} --profile debug --flag "-fpp"
           elif [ "${{ matrix.compiler }}" = "lfortran" ]; then
-            fpm test --compiler ${{ matrix.compiler }} --profile debug --flag "-cpp"
+            fpm test --compiler ${{ matrix.compiler }} --profile debug --flag "--cpp"
           else
             fpm test --compiler ${{ matrix.compiler }} --profile debug
           fi
@@ -50,7 +48,7 @@ jobs:
           if [ "${{ matrix.compiler }}" = "ifx" ]; then
             fpm test --compiler ${{ matrix.compiler }} --profile release --flag "-fpp"
           elif [ "${{ matrix.compiler }}" = "lfortran" ]; then
-            fpm test --compiler ${{ matrix.compiler }} --profile release --flag "-cpp"
+            fpm test --compiler ${{ matrix.compiler }} --profile release --flag "--cpp"
           else
             fpm test --compiler ${{ matrix.compiler }} --profile release
           fi
