@@ -25,7 +25,9 @@ jobs:
           platform: ${{ matrix.os }}
 
       - name: Checkout code
-        run: git clone https://github.com/jacobwilliams/json-fortran.git
+        run: |
+          conda install git -y
+          git clone https://github.com/jacobwilliams/json-fortran.git
               
       - name: fpm test (debug)
         run: |
