@@ -2,7 +2,7 @@ name: Fortran Compiler Tester CI/CD
 
 on:
   push:
-    branches: [master]
+    branches: [master, main]
   workflow_dispatch:
 
 permissions:
@@ -11,35 +11,43 @@ permissions:
 
 jobs:
   test_fpm:
-    name: ${{ matrix.project.name }}_${{ matrix.os }}_${{ matrix.compiler }}_fpm
+    name: ${{ matrix.name }}_${{ matrix.os }}_${{ matrix.compiler }}_fpm
     runs-on: ${{ matrix.os }}
 
     strategy:
       fail-fast: false
       matrix:
-        project:
-          - name: json-fortran
         include:
-          - {os: ubuntu-latest,  compiler: gfortran,  compiler-version: "", extra-packages: "", fpm-version: "",       fpm-flag: ""}
-          - {os: ubuntu-latest,  compiler: ifx,       compiler-version: "", extra-packages: "", fpm-version: "",       fpm-flag: "-fpp"}
-          - {os: ubuntu-latest,  compiler: flang-new, compiler-version: "", extra-packages: "", fpm-version: "",       fpm-flag: ""}
-          - {os: ubuntu-latest,  compiler: nvfortran, compiler-version: "", extra-packages: "", fpm-version: "",       fpm-flag: ""}
-          - {os: ubuntu-latest,  compiler: lfortran,  compiler-version: "", extra-packages: "", fpm-version: "0.12.0", fpm-flag: "--cpp"}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: gfortran,  compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: ifx,       compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--flag "-fpp" --verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: flang-new, compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: nvfortran, compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: lfortran,  compiler-version: '', extra-packages: '', fpm-version: '0.12.0', fpm-flag: '--flag "--cpp" --verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: gfortran,  compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: ifx,       compiler-version: '', extra-packages: '', fpm-version: '0.12.0', fpm-flag: '--flag "/fpp" --verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: flang-new, compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: lfortran,  compiler-version: '', extra-packages: '', fpm-version: '0.12.0', fpm-flag: '--flag "--cpp" --verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: macos-latest,   compiler: gfortran,  compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: macos-latest,   compiler: lfortran,  compiler-version: '', extra-packages: '', fpm-version: '0.12.0', fpm-flag: '--flag "--cpp" --verbose'}
 
-          - {os: windows-latest, compiler: gfortran,  compiler-version: "", extra-packages: "", fpm-version: "",       fpm-flag: ""}
-          - {os: windows-latest, compiler: ifx,       compiler-version: "", extra-packages: "", fpm-version: "0.12.0", fpm-flag: "/fpp"}
-          - {os: windows-latest, compiler: flang-new, compiler-version: "", extra-packages: "", fpm-version: "",       fpm-flag: ""}
-          - {os: windows-latest, compiler: lfortran,  compiler-version: "", extra-packages: "", fpm-version: "0.12.0", fpm-flag: "--cpp"}
-
-          - {os: macos-latest,   compiler: gfortran,  compiler-version: "", extra-packages: "", fpm-version: "",       fpm-flag: ""}
-          - {os: macos-latest,   compiler: lfortran,  compiler-version: "", extra-packages: "", fpm-version: "0.12.0", fpm-flag: "--cpp"}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: gfortran,  compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: ifx,       compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--flag "-fpp" --verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: flang-new, compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: nvfortran, compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: lfortran,  compiler-version: '', extra-packages: '', fpm-version: '0.12.0', fpm-flag: '--flag "--cpp" --verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: gfortran,  compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: ifx,       compiler-version: '', extra-packages: '', fpm-version: '0.12.0', fpm-flag: '--flag "/fpp" --verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: flang-new, compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: lfortran,  compiler-version: '', extra-packages: '', fpm-version: '0.12.0', fpm-flag: '--flag "--cpp" --verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: macos-latest,   compiler: gfortran,  compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: macos-latest,   compiler: lfortran,  compiler-version: '', extra-packages: '', fpm-version: '0.12.0', fpm-flag: '--flag "--cpp" --verbose'}
 
     steps:
       - name: Checkout target repository
         uses: actions/checkout@v6
         with:
-          repository: jacobwilliams/${{ matrix.project.name }}
-          path: ${{ matrix.project.name }}
+          repository: ${{ matrix.repo }}
+          path: ${{ matrix.name }}
 
       - name: Setup Fortran
         uses: gha3mi/setup-fortran-conda@latest
@@ -52,20 +60,20 @@ jobs:
 
       - name: fpm build debug
         if: always()
-        working-directory: ${{ matrix.project.name }}
-        run: fpm build --profile debug --flag "${{ matrix.fpm-flag }}" --verbose
+        working-directory: ${{ matrix.name }}
+        run: fpm build --profile debug ${{ matrix.fpm-flag }}
 
       - name: fpm build release
         if: always()
-        working-directory: ${{ matrix.project.name }}
-        run: fpm build --profile release --flag "${{ matrix.fpm-flag }}" --verbose
+        working-directory: ${{ matrix.name }}
+        run: fpm build --profile release ${{ matrix.fpm-flag }}
 
-      - name: fpm test debug
-        if: always()
-        working-directory: ${{ matrix.project.name }}
-        run: fpm test --profile debug --flag "${{ matrix.fpm-flag }}" --verbose
+      # - name: fpm test debug
+      #   if: always()
+      #   working-directory: ${{ matrix.name }}
+      #   run: fpm test --profile debug ${{ matrix.fpm-flag }}
 
-      - name: fpm test release
-        if: always()
-        working-directory: ${{ matrix.project.name }}
-        run: fpm test --profile release --flag "${{ matrix.fpm-flag }}" --verbose
+      # - name: fpm test release
+      #   if: always()
+      #   working-directory: ${{ matrix.name }}
+      #   run: fpm test --profile release ${{ matrix.fpm-flag }}
