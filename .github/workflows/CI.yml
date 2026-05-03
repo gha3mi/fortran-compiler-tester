@@ -1,54 +1,75 @@
-name: Setup Fortran Conda CI/CD
+name: Fortran Compiler Tester CI/CD
 
-on: [push]
+on:
+  push:
+    branches: [master, main]
+  workflow_dispatch:
+
 permissions:
-  contents: write
+  contents: read
+  pull-requests: read
+
 jobs:
   test_fpm:
-    name: ${{ matrix.os }}_${{ matrix.compiler }}_fpm
-    runs-on: ${{ matrix.os }}
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
+    name: ${{ matrix.project.name }}_${{ matrix.config.os }}_${{ matrix.config.compiler }}_fpm
+    runs-on: ${{ matrix.config.os }}
+
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        compiler: [gfortran, ifx, lfortran, flang-new, nvfortran]
-        exclude:
-          - {os: macos-latest,   compiler: flang-new}
-          - {os: macos-latest,   compiler: ifx}
-          - {os: macos-latest,   compiler: nvfortran}
-          - {os: windows-latest, compiler: nvfortran}
+        project:
+          - name: json-fortran
+            repo: jacobwilliams/json-fortran
+            path: json-fortran
+
+        config:
+          - {os: ubuntu-latest,  compiler: gfortran,  compiler-version: "", extra-packages: "", fpm-version: "", fpm-flag: ""}
+          - {os: ubuntu-latest,  compiler: ifx,       compiler-version: "", extra-packages: "", fpm-version: "", fpm-flag: "-fpp"}
+          - {os: ubuntu-latest,  compiler: flang-new, compiler-version: "", extra-packages: "", fpm-version: "", fpm-flag: ""}
+          - {os: ubuntu-latest,  compiler: nvfortran, compiler-version: "", extra-packages: "", fpm-version: "", fpm-flag: ""}
+          - {os: ubuntu-latest,  compiler: lfortran,  compiler-version: "", extra-packages: "", fpm-version: "0.12.0", fpm-flag: "--cpp"}
+
+          - {os: windows-latest, compiler: gfortran,  compiler-version: "", extra-packages: "", fpm-version: "", fpm-flag: ""}
+          - {os: windows-latest, compiler: ifx,       compiler-version: "", extra-packages: "", fpm-version: "0.12.0", fpm-flag: "/fpp"}
+          - {os: windows-latest, compiler: flang-new, compiler-version: "", extra-packages: "", fpm-version: "", fpm-flag: ""}
+          - {os: windows-latest, compiler: lfortran,  compiler-version: "", extra-packages: "", fpm-version: "0.12.0", fpm-flag: "--cpp"}
+
+          - {os: macos-latest,   compiler: gfortran,  compiler-version: "", extra-packages: "", fpm-version: "", fpm-flag: ""}
+          - {os: macos-latest,   compiler: lfortran,  compiler-version: "", extra-packages: "", fpm-version: "0.12.0", fpm-flag: "--cpp"}
+
     steps:
+      - name: Checkout target repository
+        uses: actions/checkout@v6
+        with:
+          repository: ${{ matrix.project.repo }}
+          path: ${{ matrix.project.path }}
+
       - name: Setup Fortran
         uses: gha3mi/setup-fortran-conda@latest
         with:
-          compiler: ${{ matrix.compiler }}
-          platform: ${{ matrix.os }}
+          compiler: ${{ matrix.config.compiler }}
+          compiler-version: ${{ matrix.config.compiler-version }}
+          extra-packages: ${{ matrix.config.extra-packages }}
+          fpm-version: ${{ matrix.config.fpm-version }}
+          checkout-repo: false
 
-      - name: Checkout code
-        run: |
-          git clone https://github.com/jacobwilliams/json-fortran.git
-      - name: fpm test (debug)
-        shell: bash
-        run: |
-          pwd
-          cd json-fortran
-          if [ "${{ matrix.compiler }}" = "ifx" ]; then
-            fpm test --compiler ${{ matrix.compiler }} --profile debug --flag "-fpp"
-          elif [ "${{ matrix.compiler }}" = "lfortran" ]; then
-            fpm test --compiler ${{ matrix.compiler }} --profile debug --flag "--cpp"
-          else
-            fpm test --compiler ${{ matrix.compiler }} --profile debug
-          fi
+      - name: fpm build debug
+        if: always()
+        working-directory: ${{ matrix.project.path }}
+        run: fpm build --compiler ${{ matrix.config.compiler }} --profile debug --flag "${{ matrix.config.fpm-flag }}" --verbose
 
-      - name: fpm test (release)
-        shell: bash
-        run: |
-          pwd
-          cd json-fortran
-          if [ "${{ matrix.compiler }}" = "ifx" ]; then
-            fpm test --compiler ${{ matrix.compiler }} --profile release --flag "-fpp"
-          elif [ "${{ matrix.compiler }}" = "lfortran" ]; then
-            fpm test --compiler ${{ matrix.compiler }} --profile release --flag "--cpp"
-          else
-            fpm test --compiler ${{ matrix.compiler }} --profile release
-          fi
+      - name: fpm build release
+        if: always()
+        working-directory: ${{ matrix.project.path }}
+        run: fpm build --compiler ${{ matrix.config.compiler }} --profile release --flag "${{ matrix.config.fpm-flag }}" --verbose
+
+      - name: fpm test debug
+        if: always()
+        working-directory: ${{ matrix.project.path }}
+        run: fpm test --compiler ${{ matrix.config.compiler }} --profile debug --flag "${{ matrix.config.fpm-flag }}" --verbose
+
+      - name: fpm test release
+        if: always()
+        working-directory: ${{ matrix.project.path }}
+        run: fpm test --compiler ${{ matrix.config.compiler }} --profile release --flag "${{ matrix.config.fpm-flag }}" --verbose
