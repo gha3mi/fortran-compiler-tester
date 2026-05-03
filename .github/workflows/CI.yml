@@ -21,29 +21,29 @@ jobs:
           # compiler-version: if any specific compiler version is needed, specify it here, otherwise leave it as an empty string to use the latest version available in conda
           # extra-packages: if any additional packages are needed to be installed via conda, specify them here
           # fpm 0.13.0 issue: https://github.com/fortran-lang/fpm/issues/1248, https://github.com/gha3mi/setup-fortran-conda/issues/140
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: gfortran,  compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: ifx,       compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--flag "-fpp" --verbose'}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: flang-new, compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: nvfortran, compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: lfortran,  compiler-version: '', extra-packages: '', fpm-version: '0.12.0', fpm-flag: '--flag "--cpp" --verbose'}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: gfortran,  compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: ifx,       compiler-version: '', extra-packages: '', fpm-version: '0.12.0', fpm-flag: '--flag "/fpp" --verbose'}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: flang-new, compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: lfortran,  compiler-version: '', extra-packages: '', fpm-version: '0.12.0', fpm-flag: '--flag "--cpp" --verbose'}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: macos-latest,   compiler: gfortran,  compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: macos-latest,   compiler: lfortran,  compiler-version: '', extra-packages: '', fpm-version: '0.12.0', fpm-flag: '--flag "--cpp" --verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: gfortran,  fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: ifx,       fpm-version: '',       fpm-flag: '--flag "-fpp" --verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: flang-new, fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: nvfortran, fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: lfortran,  fpm-version: '0.12.0', fpm-flag: '--flag "--cpp" --verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: gfortran,  fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: ifx,       fpm-version: '0.12.0', fpm-flag: '--flag "/fpp" --verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: flang-new, fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: lfortran,  fpm-version: '0.12.0', fpm-flag: '--flag "--cpp" --verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: macos-latest,   compiler: gfortran,  fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: macos-latest,   compiler: lfortran,  fpm-version: '0.12.0', fpm-flag: '--flag "--cpp" --verbose'}
 
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: gfortran,  compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: ifx,       compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--flag "-fpp" --verbose'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: flang-new, compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: nvfortran, compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: lfortran,  compiler-version: '', extra-packages: '', fpm-version: '0.12.0', fpm-flag: '--flag "--cpp" --verbose'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: gfortran,  compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: ifx,       compiler-version: '', extra-packages: '', fpm-version: '0.12.0', fpm-flag: '--flag "/fpp" --verbose'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: flang-new, compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: lfortran,  compiler-version: '', extra-packages: '', fpm-version: '0.12.0', fpm-flag: '--flag "--cpp" --verbose'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: macos-latest,   compiler: gfortran,  compiler-version: '', extra-packages: '', fpm-version: '',       fpm-flag: '--verbose'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: macos-latest,   compiler: lfortran,  compiler-version: '', extra-packages: '', fpm-version: '0.12.0', fpm-flag: '--flag "--cpp" --verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: gfortran,  fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: ifx,       fpm-version: '',       fpm-flag: '--flag "-fpp" --verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: flang-new, fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: nvfortran, fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: lfortran,  fpm-version: '0.12.0', fpm-flag: '--flag "--cpp" --verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: gfortran,  fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: ifx,       fpm-version: '0.12.0', fpm-flag: '--flag "/fpp" --verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: flang-new, fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: lfortran,  fpm-version: '0.12.0', fpm-flag: '--flag "--cpp" --verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: macos-latest,   compiler: gfortran,  fpm-version: '',       fpm-flag: '--verbose'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: macos-latest,   compiler: lfortran,  fpm-version: '0.12.0', fpm-flag: '--flag "--cpp" --verbose'}
 
           # - add more repositories or configurations here
     steps:
@@ -57,8 +57,8 @@ jobs:
         uses: gha3mi/setup-fortran-conda@latest
         with:
           compiler: ${{matrix.compiler}}
-          compiler-version: ${{matrix.compiler-version}}
-          extra-packages: ${{matrix.extra-packages}}
+          # compiler-version: ${{matrix.compiler-version}}
+          # extra-packages: ${{matrix.extra-packages}}
           fpm-version: ${{matrix.fpm-version}}
           checkout-repo: false
 
@@ -93,29 +93,29 @@ jobs:
         include:
           # compiler-version: if any specific compiler version is needed, specify it here, otherwise leave it as an empty string to use the latest version available in conda
           # extra-packages: if any additional packages are needed to be installed via conda, specify them here
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: gfortran,  compiler-version: '', extra-packages: '', cmake-options: ''}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: ifx,       compiler-version: '', extra-packages: '', cmake-options: ''}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: flang-new, compiler-version: '', extra-packages: '', cmake-options: ''}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: nvfortran, compiler-version: '', extra-packages: '', cmake-options: ''}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: lfortran,  compiler-version: '', extra-packages: '', cmake-options: ''}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: gfortran,  compiler-version: '', extra-packages: '', cmake-options: ''}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: ifx,       compiler-version: '', extra-packages: '', cmake-options: ''}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: flang-new, compiler-version: '', extra-packages: '', cmake-options: ''}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: lfortran,  compiler-version: '', extra-packages: '', cmake-options: ''}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: macos-latest,   compiler: gfortran,  compiler-version: '', extra-packages: '', cmake-options: ''}
-          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: macos-latest,   compiler: lfortran,  compiler-version: '', extra-packages: '', cmake-options: ''}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: gfortran,  cmake-options: 'JSONFORTRAN_STATIC_LIBRARY_ONLY=ON'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: ifx,       cmake-options: 'JSONFORTRAN_STATIC_LIBRARY_ONLY=ON'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: flang-new, cmake-options: 'JSONFORTRAN_STATIC_LIBRARY_ONLY=ON'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: nvfortran, cmake-options: 'JSONFORTRAN_STATIC_LIBRARY_ONLY=ON'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: ubuntu-latest,  compiler: lfortran,  cmake-options: 'JSONFORTRAN_STATIC_LIBRARY_ONLY=ON'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: gfortran,  cmake-options: 'JSONFORTRAN_STATIC_LIBRARY_ONLY=ON'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: ifx,       cmake-options: 'JSONFORTRAN_STATIC_LIBRARY_ONLY=ON'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: flang-new, cmake-options: 'JSONFORTRAN_STATIC_LIBRARY_ONLY=ON'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: windows-latest, compiler: lfortran,  cmake-options: 'JSONFORTRAN_STATIC_LIBRARY_ONLY=ON'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: macos-latest,   compiler: gfortran,  cmake-options: 'JSONFORTRAN_STATIC_LIBRARY_ONLY=ON'}
+          - {name: json-fortran, repo: jacobwilliams/json-fortran, os: macos-latest,   compiler: lfortran,  cmake-options: 'JSONFORTRAN_STATIC_LIBRARY_ONLY=ON'}
 
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: gfortran,  compiler-version: '', extra-packages: '', cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: ifx,       compiler-version: '', extra-packages: '', cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: flang-new, compiler-version: '', extra-packages: '', cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: nvfortran, compiler-version: '', extra-packages: '', cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: lfortran,  compiler-version: '', extra-packages: '', cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: gfortran,  compiler-version: '', extra-packages: '', cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: ifx,       compiler-version: '', extra-packages: '', cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: flang-new, compiler-version: '', extra-packages: '', cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: lfortran,  compiler-version: '', extra-packages: '', cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: macos-latest,   compiler: gfortran,  compiler-version: '', extra-packages: '', cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
-          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: macos-latest,   compiler: lfortran,  compiler-version: '', extra-packages: '', cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: gfortran,  cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: ifx,       cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: flang-new, cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: nvfortran, cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: ubuntu-latest,  compiler: lfortran,  cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: gfortran,  cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: ifx,       cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: flang-new, cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: windows-latest, compiler: lfortran,  cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: macos-latest,   compiler: gfortran,  cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
+          - {name: bspline-fortran, repo: jacobwilliams/bspline-fortran, os: macos-latest,   compiler: lfortran,  cmake-options: '-DBSPLINE_BUILD_SHARED_LIBS=OFF'}
 
           # - add more repositories or configurations here
     steps:
@@ -129,8 +129,8 @@ jobs:
         uses: gha3mi/setup-fortran-conda@latest
         with:
           compiler: ${{matrix.compiler}}
-          compiler-version: ${{matrix.compiler-version}}
-          extra-packages: ${{matrix.extra-packages}}
+          # compiler-version: ${{matrix.compiler-version}}
+          # extra-packages: ${{matrix.extra-packages}}
           checkout-repo: false
 
       - name: cmake build debug
