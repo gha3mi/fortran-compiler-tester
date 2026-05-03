@@ -23,6 +23,10 @@ jobs:
             repo: jacobwilliams/json-fortran
             path: json-fortran
 
+          - name: bspline-fortran
+            repo: jacobwilliams/bspline-fortran
+            path: bspline-fortran
+
         config:
           - {os: ubuntu-latest,  compiler: gfortran,  compiler-version: "", extra-packages: "", fpm-version: "", fpm-flag: ""}
           - {os: ubuntu-latest,  compiler: ifx,       compiler-version: "", extra-packages: "", fpm-version: "", fpm-flag: "-fpp"}
